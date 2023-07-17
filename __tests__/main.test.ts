@@ -1,4 +1,4 @@
-import { copyCharacter } from '../src/main.js';
+import { copyCharacter, copyCharacters } from '../src/main.js';
 
 describe('Old Mutual Code Kata Unit Tests', () => {
     it('Should expect the response to be Batman', () => {
@@ -15,5 +15,9 @@ describe('Old Mutual Code Kata Unit Tests', () => {
     
     it('Should expect the response to be empty', () => {
         expect(copyCharacter('\nSpiderman')).toBe('');
+    });
+    
+    it('Should expect something', () => {
+        copyCharacters('Spiderman');
     });
 });

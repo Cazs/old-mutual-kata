@@ -1,10 +1,16 @@
-import Copier from "./Copier.js";
-import { IDestination } from "./IDestination.js";
-import { ISource } from "./ISource.js";
-import { mock, instance } from "ts-mockito";
+import Copier from './Copier.js';
+import { IDestination } from './IDestination.js';
+import { ISource } from './ISource.js';
+import { mock, instance } from 'ts-mockito';
 
+// Declare ISource Global Instance
 let source: ISource;
+
+// Declare IDestination Global Instance
 let destination: IDestination;
+
+// Declare Copier Global Instance
+let copier: Copier;
 
 export const initSource = (): ISource => {
   // Create Source Mocks
@@ -13,8 +19,10 @@ export const initSource = (): ISource => {
   // Mock Source Instance
   const source: ISource = instance(mockedSource);
 
+  // Bind Read Character method
   source.ReadChar = readCharacter;
 
+  // Return ISource Instance
   return source;
 };
 
@@ -25,36 +33,72 @@ export const initDestination = (): IDestination => {
   // Mock Destination Instance
   const destination: IDestination = instance(mockedDestination);
 
+  // Bind Write Character method
   destination.WriteChar = writeCharacter;
 
+  // Return IDestination Instance
   return destination;
 };
 
-export const readCharacter = (): string =>
-  source?.character?.toString()?.length > 1 &&
-  !/\n/g.test(source?.character?.toString()?.substring(0, 1))
-    ? source.character.toString().charAt(0)
-    : null;
+// ISource Stubs
+export const readCharacter = (): string | undefined => {
+  const minPos = /\n/g.test(source?.character?.toString()) ? 1 : 0;
 
-export const writeCharacter = (char: string) => {
-  destination.character += new String(char);
+  return source?.character?.toString()?.length > minPos &&
+  !/\n/g.test(source?.character?.toString()?.substring(minPos, 1))
+    ? source.character.toString().charAt(0)
+    : undefined;
+}
+
+export const readCharacters = (count: number): string[] => {
+  const charLen = source?.character?.toString()?.length;
+
+  const newLineDelimeterPos = source?.character?.toString()?.indexOf('\n');
+
+  let maxLength = count >= 0 && count < charLen ? count : charLen;
+  maxLength = newLineDelimeterPos > maxLength ? newLineDelimeterPos : maxLength;
+
+  return source?.character?.toString()?.substring(0, maxLength)?.split('');
 };
 
-export const copyCharacter = (character: string = 'Super\nman\n') => {
+// IDestination Stubs
+export const writeCharacter = (char: string) => {
+  destination.character += char;
+  console.log('> IDestination Current Character Name: ', destination?.character);
+};
+
+export const writeCharacters = (chars: string[]) => writeCharacter(chars.join(''));
+
+export const initGlobals = (character: string) => {
+  // Init ISource and IDestination
   source = initSource();
   destination = initDestination();
 
+  // Init defaults
   source.character = character;
   destination.character = '';
 
   // Init Copier
-  const copier: Copier = new Copier(source, destination);
+  copier = new Copier(source, destination);
+}
+
+export const copyCharacter = (character?: string) => {
+  initGlobals(character || process.env.OM_CHAR_NAME || 'Super\nman\n');
 
   // Copy from ISource to IDestination
   copier.Copy();
 
-  console.log("Destination character: ", destination?.character);
+  console.log('\n>>> IDestination Final Character Name: ', destination?.character, ' <<<');
   return destination?.character;
 };
 
-export default copyCharacter();
+export const copyCharacters = (character?: string) => {
+  initGlobals(character || process.env.OM_CHAR_NAME || 'Super\nman\n');
+
+  writeCharacters(readCharacters(Number(process.env.OM_CHAR_NAME_ARBITRARY_LEN || '0')));
+
+  console.log('\n>>> IDestination Final Character Name (Arbitrary Length): ', destination?.character, ' <<<');
+  return destination?.character;
+};
+
+export default Number(process.env.OM_CHAR_NAME_ARBITRARY_LEN || '0') > 0 ? copyCharacters() : copyCharacter();

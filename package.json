@@ -23,7 +23,8 @@
     "typescript": "~5.0"
   },
   "scripts": {
-    "start": "node build/src/main.js runCopier",
+    "start": "node build/src/main.js",
+    "start:bonus": "set OM_CHAR_NAME=Superman && set OM_CHAR_NAME_ARBITRARY_LEN=5 && node build/src/main.js",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.json",
