@@ -1,11 +1,19 @@
-import { runCopier } from '../src/main.js';
+import { copyCharacter } from '../src/main.js';
 
-describe('Old Mutual Code Kata', () => {
+describe('Old Mutual Code Kata Unit Tests', () => {
     it('Should expect the response to be Batman', () => {
-        expect(runCopier('Batman\nSuperman')).toBe('Batman');
+        expect(copyCharacter('Batman\nSuperman')).toBe('Batman');
     });
     
     it('Should expect the response to be Super', () => {
-        expect(runCopier()).toBe('Super');
+        expect(copyCharacter()).toBe('Super');
+    });
+    
+    it('Should expect the response to be Ironman', () => {
+        expect(copyCharacter('Ironman\n')).toBe('Ironman');
+    });
+    
+    it('Should expect the response to be empty', () => {
+        expect(copyCharacter('\nSpiderman')).toBe('');
     });
 });

@@ -4,7 +4,7 @@
   "description": "Node.js/TypeScript for the Old Mutual Code Kata.",
   "type": "module",
   "engines": {
-    "node": ">= 18.12 <19"
+    "node": ">= 18.16 <19"
   },
   "devDependencies": {
     "@types/jest": "~29.5",

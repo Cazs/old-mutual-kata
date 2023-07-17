@@ -3,8 +3,8 @@ import { IDestination } from './IDestination.js';
 import { ISource } from './ISource.js';
 import { mock, instance } from 'ts-mockito';
 
-export const runCopier = (character?: string) => {
-  console.log('init..');
+export const copyCharacter = (character?: string) => {
+
   // Create mocks
   const mockedSource: ISource = mock<ISource>();
   const mockedDestination: IDestination = mock<IDestination>();
@@ -24,7 +24,6 @@ export const runCopier = (character?: string) => {
   mockedDestination.character = '';
 
   destination.WriteChar = (char: string) => {
-    console.log('char: ', char);
     mockedDestination.character += new String(char);
   };
 
@@ -35,4 +34,4 @@ export const runCopier = (character?: string) => {
   return mockedDestination.character;
 };
 
-export default runCopier();
+export default copyCharacter();
