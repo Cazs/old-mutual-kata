@@ -6,9 +6,10 @@ import { mock, instance } from "ts-mockito";
 let source: ISource;
 let destination: IDestination;
 
-export const initSource = () => {
+export const initSource = (): ISource => {
   // Create Source Mocks
   const mockedSource: ISource = mock<ISource>();
+
   // Mock Source Instance
   const source: ISource = instance(mockedSource);
 
@@ -17,7 +18,7 @@ export const initSource = () => {
   return source;
 };
 
-export const initDestination = () => {
+export const initDestination = (): IDestination => {
   // Create Destination Mocks
   const mockedDestination: IDestination = mock<IDestination>();
 
@@ -29,7 +30,7 @@ export const initDestination = () => {
   return destination;
 };
 
-export const readCharacter = () =>
+export const readCharacter = (): string =>
   source?.character?.toString()?.length > 1 &&
   !/\n/g.test(source?.character?.toString()?.substring(0, 1))
     ? source.character.toString().charAt(0)
