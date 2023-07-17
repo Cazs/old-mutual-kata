@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-old-mutual-kata",
+  "name": "Old Mutual kata",
   "version": "1.0.0",
-  "description": "Node.js/TypeScript Old Mutual Code Kata.",
+  "description": "Node.js/TypeScript for the Old Mutual Code Kata.",
   "type": "module",
   "engines": {
     "node": ">= 18.12 <19"

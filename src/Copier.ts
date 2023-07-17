@@ -1,5 +1,5 @@
-import { IDestination } from "./IDestination.js";
-import { ISource } from "./ISource.js";
+import { IDestination } from './IDestination.js';
+import { ISource } from './ISource.js';
 
 export default class Copier {
     private _source: ISource;
@@ -15,19 +15,5 @@ export default class Copier {
             this._destination.WriteChar(this._source.ReadChar().toString());
             this._source.character = this._source.character.toString().substring(1, this._source.character.toString().length);
         }
-        // this._destination.WriteChar(this._source.ReadChar());
-
-        // new Promise(() => this._source.ReadChar())
-        /*this._destination.WriteChar(this._source.ReadChar()
-            .split('')
-            .reduce((p, c, i, acc) => {
-                return acc + c;
-            }, ''));*/
-        
-        /*this._source.ReadChar()
-            .split('')
-            .forEach((char: string) => {
-                this._destination.WriteChar(char);
-            });*/
     }
 }
