@@ -1,7 +1,7 @@
-import Copier from "./Copier.js";
-import { IDestination } from "./IDestination.js";
-import { ISource } from "./ISource.js";
-import { mock, instance } from "ts-mockito";
+import Copier from './Copier.js';
+import { IDestination } from './IDestination.js';
+import { ISource } from './ISource.js';
+import { mock, instance } from 'ts-mockito';
 
 export const runCopier = (character?: string) => {
   console.log('init..');
@@ -11,7 +11,7 @@ export const runCopier = (character?: string) => {
 
   // Mock Source
   const source: ISource = instance(mockedSource);
-  source.character = character || "Super\nman\n";
+  source.character = character || 'Super\nman\n';
 
   source.ReadChar = () =>
     source.character.toString().length > 1 &&
@@ -21,17 +21,17 @@ export const runCopier = (character?: string) => {
 
   // Mock Destination
   const destination: IDestination = instance(mockedDestination);
-  mockedDestination.character = "";
+  mockedDestination.character = '';
 
   destination.WriteChar = (char: string) => {
-    console.log("char: ", char);
+    console.log('char: ', char);
     mockedDestination.character += new String(char);
   };
 
   const copier: Copier = new Copier(source, destination);
   copier.Copy();
 
-  console.log("Destination character: ", mockedDestination.character);
+  console.log('Destination character: ', mockedDestination.character);
   return mockedDestination.character;
 };
 
