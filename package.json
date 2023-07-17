@@ -1,5 +1,5 @@
 {
-  "name": "Old Mutual kata",
+  "name": "Old Mutual Kata",
   "version": "1.0.0",
   "description": "Node.js/TypeScript for the Old Mutual Code Kata.",
   "type": "module",
@@ -23,7 +23,7 @@
     "typescript": "~5.0"
   },
   "scripts": {
-    "start": "node build/src/main.js",
+    "start": "node build/src/main.js runCopier",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.json",
