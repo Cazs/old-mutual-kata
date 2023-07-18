@@ -1,6 +1,6 @@
 {
   "name": "Old Mutual Kata",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Node.js/TypeScript for the Old Mutual Code Kata.",
   "type": "module",
   "engines": {

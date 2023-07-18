@@ -45,9 +45,9 @@ export const initDestination = (): IDestination => {
 // ISource ReadChar Stub
 export const readCharacter = (): string | undefined => {
   return source?.character?.toString()?.length > 1 &&
-    !/\n/g.test(source?.character?.toString()?.substring(0, 1))
-    ? source.character.toString().charAt(0)
-    : undefined;
+    /\n/g.test(source?.character?.toString()?.substring(0, 1))
+    ? undefined
+    : source.character.toString().charAt(0)?.trim();
 };
 
 // ISource ReadChar Bonus Stub
@@ -82,7 +82,7 @@ export const initGlobals = (character: string) => {
   source = initSource();
   destination = initDestination();
 
-  // Init defaults
+  // Init Defaults
   source.character = character;
   destination.character = "";
 
